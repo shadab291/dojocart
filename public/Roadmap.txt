@@ -1,0 +1,83 @@
+
+Front end tree
+
+
+├── src/
+│   ├── components/
+│   │   ├── Cart/
+│   │   │   ├── Cart.js
+│   │   │   ├── CartItem.js
+│   │   │   └── ...
+│   │   ├── Orders/
+│   │   │   ├── OrderList.js
+│   │   │   ├── OrderItem.js
+│   │   │   └── ...
+│   │   ├── Product/
+│   │   │   ├── ProductList.js
+│   │   │   ├── ProductItem.js
+│   │   │   ├── ProductDetail.js
+│   │   │   └── ...
+│   │   ├── Sales/
+│   │   │   ├── SalesReport.js
+│   │   │   ├── SalesChart.js
+│   │   │   └── ...
+│   │   ├── Settings/
+│   │   │   ├── ProfileSettings.js
+│   │   │   ├── SecuritySettings.js
+│   │   │   └── ...
+│   │   ├── Dashboard/
+│   │   │   ├── DashboardOverview.js
+│   │   │   ├── DashboardStats.js
+│   │   │   └── ...
+│   │   └── ...
+│   ├── pages/
+│   │   ├── CartPage.js
+│   │   ├── OrdersPage.js
+│   │   ├── ProductPage.js
+│   │   ├── SalesPage.js
+│   │   ├── SettingsPage.js
+│   │   ├── DashboardPage.js
+│   │   └── ...
+│   ├── App.js
+│   ├── index.js
+│   └── ...
+└── ...
+
+Backend tree
+
+├── src/
+│   ├── controllers/
+│   │   ├── CartController.java
+│   │   ├── OrderController.java
+│   │   ├── ProductController.java
+│   │   ├── SalesController.java
+│   │   ├── SettingsController.java
+│   │   ├── DashboardController.java
+│   │   └── ...
+│   ├── models/
+│   │   ├── Cart.java
+│   │   ├── Order.java
+│   │   ├── Product.java
+│   │   ├── Sale.java
+│   │   ├── Settings.java
+│   │   ├── DashboardData.java
+│   │   └── ...
+│   ├── services/
+│   │   ├── CartService.java
+│   │   ├── OrderService.java
+│   │   ├── ProductService.java
+│   │   ├── SalesService.java
+│   │   ├── SettingsService.java
+│   │   ├── DashboardService.java
+│   │   └── ...
+│   ├── repositories/
+│   │   ├── CartRepository.java
+│   │   ├── OrderRepository.java
+│   │   ├── ProductRepository.java
+│   │   ├── SalesRepository.java
+│   │   ├── SettingsRepository.java
+│   │   ├── DashboardRepository.java
+│   │   └── ...
+│   ├── Application.java
+│   └── ...
+└── ...
