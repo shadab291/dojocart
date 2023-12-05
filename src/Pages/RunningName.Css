@@ -1,0 +1,19 @@
+.running-name-container {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .running-name {
+    animation: runningText 10s linear infinite; /* Modify animation duration as needed */
+    white-space: nowrap;
+  }
+  
+  @keyframes runningText {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
