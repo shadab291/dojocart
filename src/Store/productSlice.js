@@ -25,8 +25,8 @@ const productSlice = createSlice({
 export const { setProducts, setStatus } = productSlice.actions;
 export default productSlice.reducer;
 
-export function fetchproducts() {
-  return async function fetchProductThunk(dispatch, getState) {
+export function loadProducts() {
+  return async function fetchProductThunk(dispatch) {
     dispatch(setStatus(STATUSES.LOADING));
 
     try {
@@ -35,7 +35,23 @@ export function fetchproducts() {
       dispatch(setProducts(data));
       dispatch(setStatus(STATUSES.IDLE));
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      dispatch(setStatus(STATUSES.ERROR));
+    }
+  };
+}
+
+export function searchProducts(searchTerm) {
+  return async function searchProductThunk(dispatch) {
+    dispatch(setStatus(STATUSES.LOADING));
+
+    try {
+      const res = await fetch(`https://fakestoreapi.com/products?search=${searchTerm}`);
+      const data = await res.json();
+      dispatch(setProducts(data));
+      dispatch(setStatus(STATUSES.IDLE));
+    } catch (err) {
+      console.error(err);
       dispatch(setStatus(STATUSES.ERROR));
     }
   };
