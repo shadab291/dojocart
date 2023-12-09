@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
-
+import ContactsService from "../services/ContactsService";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -26,12 +26,51 @@ function Contact() {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
+  const [user, setUser] = useState({
+    id: "",
+    name: "",
+    location: "",
+    message: "",
+    email: "",
+    phoneNumber: "", // Updated property name
+    address: "",
+  });
+
   const onSubmit = (data) => {
     console.log(data);
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setUser({ ...user, [e.target.name]: value });
+  };
+
+  const saveUser = (e) => {
+    e.preventDefault();
+    ContactsService.saveuser(user)
+      .then((response) => {
+        console.log(response);
+        // Reset the form after submission
+        reset(); // Resetting the form
+        // Clear the user state
+        setUser({
+          id: "",
+          name: "",
+          location: "",
+          message: "",
+          email: "",
+          phoneNumber: "", // Updated property name
+          address: "",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -62,6 +101,8 @@ function Contact() {
               <TextField
                 {...field}
                 label="Name"
+                value={user.name}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
                 error={!!errors.name}
@@ -78,6 +119,8 @@ function Contact() {
               <TextField
                 {...field}
                 label="Email"
+                value={user.email}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
                 error={!!errors.email}
@@ -101,6 +144,8 @@ function Contact() {
               <TextField
                 {...field}
                 label="Location"
+                value={user.location}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
                 error={!!errors.location}
@@ -124,6 +169,8 @@ function Contact() {
               <TextField
                 {...field}
                 label="Address"
+                value={user.address}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
                 error={!!errors.address}
@@ -141,12 +188,14 @@ function Contact() {
         </div>
         <div className="mb-4">
           <Controller
-            name="phone"
+            name="phoneNumber"
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
                 label="Phone"
+                value={user.phoneNumber} // Updated property name
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
                 error={!!errors.phone}
@@ -170,6 +219,8 @@ function Contact() {
               <TextField
                 {...field}
                 label="Message"
+                value={user.message}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
                 multiline
@@ -181,7 +232,12 @@ function Contact() {
           />
         </div>
         <div className="mb-4">
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            onClick={saveUser}
+            variant="contained"
+            color="primary"
+          >
             Send
           </Button>
         </div>

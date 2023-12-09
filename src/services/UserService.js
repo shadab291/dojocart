@@ -9,7 +9,7 @@ class UserService {
     return axios.post(USER_API_BASE_URL,formData);
 
  }
-
+ 
 }
 
 export default new UserService();
